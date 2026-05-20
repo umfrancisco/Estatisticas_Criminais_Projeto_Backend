@@ -100,23 +100,23 @@
 <div class="container">
   <h1>Estatisticas Criminais no Estado de São Paulo</h1>
   <div class="options">
-	<input type="radio" name="cidade" value="saopaulo">
-    <label for="cidade">São Paulo</label>
-    <input type="radio" name="cidade" value="campinas">
-    <label for="cidade">Campinas</label>
-    <input type="radio" name="cidade" value="ribeiraopreto">
-    <label for="cidade">Ribeirão Preto</label>
+	<input type="radio" id="saopaulo" name="cidade" value="saopaulo">
+    <label for="saopaulo">São Paulo</label>
+    <input type="radio" id="campinas" name="cidade" value="campinas">
+    <label for="campinas">Campinas</label>
+    <input type="radio" id="ribeiraopreto" name="cidade" value="ribeiraopreto">
+    <label for="ribeiraopreto">Ribeirão Preto</label>
   </div>
   </br>
   <div class="options">
-    <input type="radio" name="infracao" value="homicidio">
-    <label for="infracao">Homicidio</label>
-    <input type="radio" name="infracao" value="furto">
-    <label for="infracao">Furto</label>
-    <input type="radio" name="infracao" value="roubo">
-    <label for="infracao">Roubo</label>
-	<input type="radio" name="infracao" value="veiculo">
-	<label for="infracao">Furto e Roubo de Veículo</label>
+    <input type="radio" id="homicidio" name="infracao" value="homicidio">
+    <label for="homicidio">Homicidio</label>
+    <input type="radio" id="furto" name="infracao" value="furto">
+    <label for="furto">Furto</label>
+    <input type="radio" id="roubo" name="infracao" value="roubo">
+    <label for="roubo">Roubo</label>
+	<input type="radio" id="veiculo" name="infracao" value="veiculo">
+	<label for="veiculo">Furto e Roubo de Veículo</label>
   </div>
   <button class="btn" onclick="reloadPage()">Atualizar gráfico com os valores selecionados</button>
   <p>Evolução anual de ocorrências entre 2001 e 2025</p>
