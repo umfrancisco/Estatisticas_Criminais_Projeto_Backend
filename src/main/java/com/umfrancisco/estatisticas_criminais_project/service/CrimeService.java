@@ -1,6 +1,7 @@
 package com.umfrancisco.estatisticas_criminais_project.service;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 import org.springframework.stereotype.Service;
@@ -29,6 +30,17 @@ public class CrimeService {
 	
 	public List<Crime> findAll() {
 		return repository.findAll();
+	}
+	
+	public List<Crime> findByCidade(String cidade) {
+		List<Crime> found = new ArrayList<>();
+		List<Crime> list = findAll();
+		for (var c : list) {
+			if (c.getCidade().getNomeCidadeUrl().equals(cidade)) {
+				found.add(c);
+			}
+		}
+		return found;
 	}
 	
 	public void saveDataFromCsvFile() throws IOException {

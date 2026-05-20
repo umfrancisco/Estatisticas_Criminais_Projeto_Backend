@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.List;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import com.umfrancisco.estatisticas_criminais_project.model.Crime;
@@ -23,6 +24,11 @@ public class CrimeController {
 	@GetMapping
 	public List<Crime> findAll() {
 		return service.findAll();
+	}
+	
+	@GetMapping("/{cidade}")
+	public List<Crime> findByCidade(@PathVariable String cidade) {
+		return service.findByCidade(cidade);
 	}
 	
 	@GetMapping("/data")

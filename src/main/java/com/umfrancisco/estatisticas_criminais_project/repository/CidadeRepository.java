@@ -6,5 +6,5 @@ import com.umfrancisco.estatisticas_criminais_project.model.Cidade;
 
 @Repository
 public interface CidadeRepository extends JpaRepository<Cidade, Long> {
-	
+	Cidade findByNomeCidadeUrl(String nomeCidadeUrl);
 }
