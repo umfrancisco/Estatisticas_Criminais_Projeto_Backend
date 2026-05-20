@@ -46,7 +46,8 @@ public class CrimeController {
 	}
 	
 	@GetMapping("/data")
-	public void saveDataFromCsvFile() throws IOException {
+	public String saveDataFromCsvFile() throws IOException {
 		service.saveDataFromCsvFile();
+		return "saved";
 	}
 }

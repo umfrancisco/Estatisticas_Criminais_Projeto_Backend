@@ -69,14 +69,24 @@ public class CrimeService {
 	public void saveDataFromCsvFile() throws IOException {
 		Mapa mapa = new Mapa();
 		
+		Cidade bauru = new Cidade(random.nextLong(Long.MAX_VALUE), "Bauru", "SP", "bauru", "crime-stats-bauru.csv");
 		Cidade campinas = new Cidade(random.nextLong(Long.MAX_VALUE), "Campinas", "SP", "campinas", "crime-stats-campinas.csv");
+		Cidade presidenteprudente = new Cidade(random.nextLong(Long.MAX_VALUE), "Presidente Prudente", "SP", "presidenteprudente", "crime-stats-presidente-prudente.csv");
 		Cidade ribeiraopreto = new Cidade(random.nextLong(Long.MAX_VALUE), "Ribeirão Preto", "SP", "ribeiraopreto", "crime-stats-ribeirao-preto.csv");
+		Cidade santos = new Cidade(random.nextLong(Long.MAX_VALUE), "Santos", "SP", "santos", "crime-stats-santos.csv");
+		Cidade saocarlos = new Cidade(random.nextLong(Long.MAX_VALUE), "São Carlos", "SP", "saocarlos", "crime-stats-sao-carlos.csv");
 		Cidade saopaulo = new Cidade(random.nextLong(Long.MAX_VALUE), "São Paulo", "SP", "saopaulo", "crime-stats-sao-paulo.csv");
-		cidadeService.save(campinas, ribeiraopreto, saopaulo);
+		Cidade sorocaba = new Cidade(random.nextLong(Long.MAX_VALUE), "Sorocaba", "SP", "sorocaba", "crime-stats-sorocaba.csv");
+		cidadeService.save(bauru, campinas, presidenteprudente, ribeiraopreto, santos, saocarlos, saopaulo, sorocaba);
 		
+		CsvFileParser.read(mapa, bauru);
 		CsvFileParser.read(mapa, campinas);
+		CsvFileParser.read(mapa, presidenteprudente);
 		CsvFileParser.read(mapa, ribeiraopreto);
+		CsvFileParser.read(mapa, santos);
+		CsvFileParser.read(mapa, saocarlos);
 		CsvFileParser.read(mapa, saopaulo);
+		CsvFileParser.read(mapa, sorocaba);
 		
 		for (var crime : mapa.getCrimes()) {
 			save(crime);
