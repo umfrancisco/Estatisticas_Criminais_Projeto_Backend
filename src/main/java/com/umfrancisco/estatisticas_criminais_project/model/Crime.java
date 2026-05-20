@@ -8,18 +8,21 @@ import jakarta.persistence.ManyToOne;
 public class Crime {
 	
 	@Id
-	private final Long id;
+	private Long id;
 	@ManyToOne
-	private final Cidade cidade;
-	private final Integer ano;
-	private final Integer homicidio;
-	private final Integer furto;
-	private final Integer roubo;
-	private final Integer furtoRouboVeiculos;
+	private Cidade cidade;
+	private Integer ano;
+	private Integer homicidio;
+	private Integer furto;
+	private Integer roubo;
+	private Integer furtoRouboVeiculos;
+	
+	public Crime() {
+		
+	}
 	
 	public Crime(Long id, Cidade cidade, Integer ano, Integer homicidio, Integer furto, Integer roubo,
 			Integer furtoRouboVeiculos) {
-		super();
 		this.id = id;
 		this.cidade = cidade;
 		this.ano = ano;

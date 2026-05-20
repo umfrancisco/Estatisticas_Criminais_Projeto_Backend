@@ -7,11 +7,15 @@ import jakarta.persistence.Id;
 public class Cidade {
 	
 	@Id
-	private final Long id;
-	private final String cidade;
-	private final String estado;
-	private final String nomeCidadeUrl;
-	private final String fileName;
+	private Long id;
+	private String cidade;
+	private String estado;
+	private String nomeCidadeUrl;
+	private String fileName;
+	
+	public Cidade() {
+		
+	}
 	
 	public Cidade(Long id, String cidade, String estado, String nomeCidadeUrl, String fileName) {
 		this.id = id;

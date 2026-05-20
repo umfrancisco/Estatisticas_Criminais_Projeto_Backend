@@ -3,9 +3,7 @@ package com.umfrancisco.estatisticas_criminais_project.service;
 import java.io.IOException;
 import java.util.List;
 import java.util.Random;
-
 import org.springframework.stereotype.Service;
-
 import com.umfrancisco.estatisticas_criminais_project.model.Cidade;
 import com.umfrancisco.estatisticas_criminais_project.model.Crime;
 import com.umfrancisco.estatisticas_criminais_project.repository.CrimeRepository;
@@ -16,10 +14,12 @@ import com.umfrancisco.estatisticas_criminais_project.util.Mapa;
 public class CrimeService {
 	
 	private CrimeRepository repository;
+	private CidadeService cidadeService;
 	private Random random;
 	
-	public CrimeService(CrimeRepository repository) {
+	public CrimeService(CrimeRepository repository, CidadeService cidadeService) {
 		this.repository = repository;
+		this.cidadeService = cidadeService;
 		random = new Random();
 	}
 	
@@ -31,12 +31,13 @@ public class CrimeService {
 		return repository.findAll();
 	}
 	
-	public void saveData() throws IOException {
+	public void saveDataFromCsvFile() throws IOException {
 		Mapa mapa = new Mapa();
 		
 		Cidade campinas = new Cidade(random.nextLong(Long.MAX_VALUE), "Campinas", "SP", "campinas", "crime-stats-campinas.csv");
 		Cidade ribeiraopreto = new Cidade(random.nextLong(Long.MAX_VALUE), "Ribeirão Preto", "SP", "ribeiraopreto", "crime-stats-ribeirao-preto.csv");
 		Cidade saopaulo = new Cidade(random.nextLong(Long.MAX_VALUE), "São Paulo", "SP", "saopaulo", "crime-stats-sao-paulo.csv");
+		cidadeService.save(campinas, ribeiraopreto, saopaulo);
 		
 		CsvFileParser.read(mapa, campinas);
 		CsvFileParser.read(mapa, ribeiraopreto);

@@ -2,9 +2,9 @@ package com.umfrancisco.estatisticas_criminais_project.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
-import com.umfrancisco.estatisticas_criminais_project.model.Crime;
+import com.umfrancisco.estatisticas_criminais_project.model.Cidade;
 
 @Repository
-public interface CrimeRepository extends JpaRepository<Crime, Long> {
+public interface CidadeRepository extends JpaRepository<Cidade, Long> {
 	
 }
