@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import com.umfrancisco.estatisticas_criminais_project.model.Crime;
+import com.umfrancisco.estatisticas_criminais_project.model.CrimeDTO;
+import com.umfrancisco.estatisticas_criminais_project.model.Infracao;
 import com.umfrancisco.estatisticas_criminais_project.service.CrimeService;
 
 @RestController
@@ -26,9 +28,16 @@ public class CrimeController {
 		return service.findAll();
 	}
 	
-	@GetMapping("/{cidade}")
-	public List<Crime> findByCidade(@PathVariable String cidade) {
-		return service.findByCidade(cidade);
+	@GetMapping("/{cidade}/{infracao}")
+	public List<CrimeDTO> findByCidade(@PathVariable String cidade, @PathVariable String infracao) {
+		infracao = infracao.toLowerCase();
+		return switch (infracao) {
+			case "homicidio" -> service.findByCidade(cidade, Infracao.HOMICIDIO);
+			case "furto" -> service.findByCidade(cidade, Infracao.FURTO);
+			case "roubo" -> service.findByCidade(cidade, Infracao.ROUBO);
+			case "veiculo" -> service.findByCidade(cidade, Infracao.FURTO_ROUBO_VEICULO);
+			default -> null;
+		};
 	}
 	
 	@GetMapping("/data")

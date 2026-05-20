@@ -7,6 +7,8 @@ import java.util.Random;
 import org.springframework.stereotype.Service;
 import com.umfrancisco.estatisticas_criminais_project.model.Cidade;
 import com.umfrancisco.estatisticas_criminais_project.model.Crime;
+import com.umfrancisco.estatisticas_criminais_project.model.CrimeDTO;
+import com.umfrancisco.estatisticas_criminais_project.model.Infracao;
 import com.umfrancisco.estatisticas_criminais_project.repository.CrimeRepository;
 import com.umfrancisco.estatisticas_criminais_project.util.CsvFileParser;
 import com.umfrancisco.estatisticas_criminais_project.util.Mapa;
@@ -32,12 +34,22 @@ public class CrimeService {
 		return repository.findAll();
 	}
 	
-	public List<Crime> findByCidade(String cidade) {
-		List<Crime> found = new ArrayList<>();
+	public List<CrimeDTO> findByCidade(String cidade, Infracao infracao) {
+		List<CrimeDTO> found = new ArrayList<>();
 		List<Crime> list = findAll();
 		for (var c : list) {
 			if (c.getCidade().getNomeCidadeUrl().equals(cidade)) {
-				found.add(c);
+				String nomeCidade = c.getCidade().getCidade();
+				Integer ano = c.getAno();
+				Integer valorInfracao = null;
+				switch (infracao) {
+					case HOMICIDIO -> valorInfracao = c.getHomicidio();
+					case FURTO -> valorInfracao = c.getFurto();
+					case ROUBO -> valorInfracao = c.getRoubo();
+					case FURTO_ROUBO_VEICULO -> valorInfracao = c.getFurtoRouboVeiculos();
+					default -> valorInfracao = null;
+				}
+				found.add(new CrimeDTO(nomeCidade, ano, infracao, valorInfracao));
 			}
 		}
 		return found;
