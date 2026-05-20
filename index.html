@@ -21,6 +21,16 @@
       max-width: 1200px;
       margin: auto;
     }
+	
+	.options {
+		text-align: center;
+	}
+	
+	.btn {
+		display: block;
+		margin: 16px auto;
+		text-align: center;
+	}
 
     h1 {
       text-align: center;
@@ -88,7 +98,27 @@
 <body>
 
 <div class="container">
-  <h1>Furto/Roubo de Veículos — São Paulo</h1>
+  <h1>Estatisticas Criminais no Estado de São Paulo</h1>
+  <div class="options">
+	<input type="radio" name="cidade" value="saopaulo">
+    <label for="cidade">São Paulo</label>
+    <input type="radio" name="cidade" value="campinas">
+    <label for="cidade">Campinas</label>
+    <input type="radio" name="cidade" value="ribeiraopreto">
+    <label for="cidade">Ribeirão Preto</label>
+  </div>
+  </br>
+  <div class="options">
+    <input type="radio" name="infracao" value="homicidio">
+    <label for="infracao">Homicidio</label>
+    <input type="radio" name="infracao" value="furto">
+    <label for="infracao">Furto</label>
+    <input type="radio" name="infracao" value="roubo">
+    <label for="infracao">Roubo</label>
+	<input type="radio" name="infracao" value="veiculo">
+	<label for="infracao">Furto e Roubo de Veículo</label>
+  </div>
+  <button class="btn" onclick="reloadPage()">Atualizar gráfico com os valores selecionados</button>
   <p>Evolução anual de ocorrências entre 2001 e 2025</p>
 
   <div class="chart-wrapper">
@@ -121,11 +151,34 @@
 
 <script>
   let chart;
+  
+  function reloadPage() {
+  	location.reload();
+  }
 
   async function loadData() {
+	
+	let selectedCidade = null;
+	let selectedInfracao = null;
+	
+	const cidades = document.getElementsByName('cidade');
+	for (let cidade of cidades) {
+		if (cidade.checked) {
+			console.log(cidade.value);
+			selectedCidade = cidade.value;
+		}
+	}
+	
+	const infracoes = document.getElementsByName('infracao');
+	for (let infracao of infracoes) {
+		if (infracao.checked) {
+			console.log(infracao.value);
+			selectedinfracao = infracao.value;
+		}
+	}
+	
     try {
-      // CHANGE THIS URL
-      const response = await fetch("http://localhost:8080/api/crimes/saopaulo/veiculo");
+      const response = await fetch(`http://localhost:8080/api/crimes/${selectedCidade}/${selectedinfracao}`);
 
       if (!response.ok) {
         throw new Error(`HTTP error: ${response.status}`);
