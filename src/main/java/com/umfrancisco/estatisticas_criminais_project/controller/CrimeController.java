@@ -28,14 +28,19 @@ public class CrimeController {
 		return service.findAll();
 	}
 	
+	@GetMapping("/{cidade}")
+	public List<Crime> findByCidade(@PathVariable String cidade) {
+		return service.findByCidade(cidade);
+	}
+	
 	@GetMapping("/{cidade}/{infracao}")
-	public List<CrimeDTO> findByCidade(@PathVariable String cidade, @PathVariable String infracao) {
+	public List<CrimeDTO> findByCidadeAndInfracao(@PathVariable String cidade, @PathVariable String infracao) {
 		infracao = infracao.toLowerCase();
 		return switch (infracao) {
-			case "homicidio" -> service.findByCidade(cidade, Infracao.HOMICIDIO);
-			case "furto" -> service.findByCidade(cidade, Infracao.FURTO);
-			case "roubo" -> service.findByCidade(cidade, Infracao.ROUBO);
-			case "veiculo" -> service.findByCidade(cidade, Infracao.FURTO_ROUBO_VEICULO);
+			case "homicidio" -> service.findByCidadeAndInfracao(cidade, Infracao.HOMICIDIO);
+			case "furto" -> service.findByCidadeAndInfracao(cidade, Infracao.FURTO);
+			case "roubo" -> service.findByCidadeAndInfracao(cidade, Infracao.ROUBO);
+			case "veiculo" -> service.findByCidadeAndInfracao(cidade, Infracao.FURTO_ROUBO_VEICULO);
 			default -> null;
 		};
 	}

@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Visualizador de Crimes - Cidades</title>
+
+  <!-- Chart.js -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #0f172a;
+      color: white;
+      margin: 0;
+      padding: 24px;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: auto;
+    }
+
+    h1 {
+      text-align: center;
+      margin-bottom: 8px;
+    }
+
+    p {
+      text-align: center;
+      color: #cbd5e1;
+      margin-bottom: 30px;
+    }
+
+    .chart-wrapper {
+      background: #1e293b;
+      padding: 20px;
+      border-radius: 14px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+    }
+
+    canvas {
+      width: 100% !important;
+      height: 500px !important;
+    }
+
+    .stats {
+      margin-top: 24px;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 16px;
+    }
+
+    .card {
+      background: #1e293b;
+      padding: 18px;
+      border-radius: 12px;
+      text-align: center;
+    }
+
+    .card h2 {
+      margin: 0;
+      font-size: 14px;
+      color: #94a3b8;
+    }
+
+    .card .value {
+      margin-top: 10px;
+      font-size: 28px;
+      font-weight: bold;
+      color: #38bdf8;
+    }
+
+    .loading {
+      text-align: center;
+      margin-top: 20px;
+      color: #94a3b8;
+    }
+
+    .error {
+      color: #ef4444;
+      text-align: center;
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <h1>Furto/Roubo de Veículos — Ribeirão Preto</h1>
+  <p>Evolução anual de ocorrências entre 2001 e 2025</p>
+
+  <div class="chart-wrapper">
+    <canvas id="crimeChart"></canvas>
+  </div>
+
+  <div class="loading" id="loading">
+    Carregando dados...
+  </div>
+
+  <div class="error" id="error"></div>
+
+  <div class="stats">
+    <div class="card">
+      <h2>Maior Valor</h2>
+      <div class="value" id="maxValue">-</div>
+    </div>
+
+    <div class="card">
+      <h2>Menor Valor</h2>
+      <div class="value" id="minValue">-</div>
+    </div>
+
+    <div class="card">
+      <h2>Média</h2>
+      <div class="value" id="avgValue">-</div>
+    </div>
+  </div>
+</div>
+
+<script>
+  let chart;
+
+  async function loadData() {
+    try {
+      // CHANGE THIS URL
+      const response = await fetch("http://localhost:8080/api/crimes/saopaulo/homicidio");
+
+      if (!response.ok) {
+        throw new Error(`HTTP error: ${response.status}`);
+      }
+
+      const data = await response.json();
+
+      // Ordenar por ano crescente
+      data.sort((a, b) => a.ano - b.ano);
+
+      const labels = data.map(item => item.ano);
+      const values = data.map(item => item.valor);
+
+      // Estatísticas
+      const max = Math.max(...values);
+      const min = Math.min(...values);
+      const avg = (
+        values.reduce((a, b) => a + b, 0) / values.length
+      ).toFixed(0);
+
+      document.getElementById('maxValue').innerText = max;
+      document.getElementById('minValue').innerText = min;
+      document.getElementById('avgValue').innerText = avg;
+
+      // Criar gráfico
+      createChart(labels, values);
+
+      document.getElementById('loading').style.display = 'none';
+
+    } catch (err) {
+      console.error(err);
+
+      document.getElementById('loading').style.display = 'none';
+
+      document.getElementById('error').innerText =
+        'Erro ao carregar dados da API.';
+    }
+  }
+
+  function createChart(labels, values) {
+    const ctx = document.getElementById('crimeChart').getContext('2d');
+
+    chart = new Chart(ctx, {
+      type: 'line',
+      data: {
+        labels,
+        datasets: [{
+          label: 'Ocorrências',
+          data: values,
+          borderColor: '#38bdf8',
+          backgroundColor: 'rgba(56, 189, 248, 0.2)',
+          fill: true,
+          tension: 0.3,
+          pointRadius: 5,
+          pointHoverRadius: 8,
+          pointBackgroundColor: '#38bdf8'
+        }]
+      },
+      options: {
+        responsive: true,
+        plugins: {
+          legend: {
+            labels: {
+              color: 'white'
+            }
+          },
+          tooltip: {
+            callbacks: {
+              label: function(context) {
+                return ` ${context.raw} ocorrências`;
+              }
+            }
+          }
+        },
+        scales: {
+          x: {
+            ticks: {
+              color: '#cbd5e1'
+            },
+            grid: {
+              color: 'rgba(255,255,255,0.05)'
+            }
+          },
+          y: {
+            beginAtZero: true,
+            ticks: {
+              color: '#cbd5e1'
+            },
+            grid: {
+              color: 'rgba(255,255,255,0.05)'
+            }
+          }
+        }
+      }
+    });
+  }
+
+  // Inicializar
+  loadData();
+</script>
+
+</body>
+</html>
