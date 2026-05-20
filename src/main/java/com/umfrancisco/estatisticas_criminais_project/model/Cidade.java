@@ -1,22 +1,37 @@
 package com.umfrancisco.estatisticas_criminais_project.model;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+
+@Entity
 public class Cidade {
 	
+	@Id
+	private final Long id;
 	private final String cidade;
 	private final String estado;
+	private final String nomeCidadeUrl;
 	private final String fileName;
 	
-	public Cidade(String cidade, String estado, String fileName) {
+	public Cidade(Long id, String cidade, String estado, String nomeCidadeUrl, String fileName) {
+		this.id = id;
 		this.cidade = cidade;
 		this.estado = estado;
+		this.nomeCidadeUrl = nomeCidadeUrl;
 		this.fileName = fileName;
 	}
 	
+	public Long getId() {
+		return id;
+	}
 	public String getCidade() {
 		return cidade;
 	}
 	public String getEstado() {
 		return estado;
+	}
+	public String getNomeCidadeUrl() {
+		return nomeCidadeUrl;
 	}
 	public String getFileName() {
 		return fileName;
@@ -24,6 +39,7 @@ public class Cidade {
 	
 	@Override
 	public String toString() {
-		return "Cidade [cidade=" + cidade + ", estado=" + estado + ", fileName=" + fileName + "]";
+		return "Cidade [id=" + id + ", cidade=" + cidade + ", estado=" + estado + ", nomeCidadeUrl=" + nomeCidadeUrl
+				+ ", fileName=" + fileName + "]";
 	}
 }
