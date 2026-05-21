@@ -69,14 +69,14 @@ public class CrimeService {
 	public void saveDataFromCsvFile() throws IOException {
 		Mapa mapa = new Mapa();
 		
-		Cidade bauru = new Cidade(random.nextLong(Long.MAX_VALUE), "Bauru", "SP", "bauru", "crime-stats-bauru.csv");
-		Cidade campinas = new Cidade(random.nextLong(Long.MAX_VALUE), "Campinas", "SP", "campinas", "crime-stats-campinas.csv");
-		Cidade presidenteprudente = new Cidade(random.nextLong(Long.MAX_VALUE), "Presidente Prudente", "SP", "presidenteprudente", "crime-stats-presidente-prudente.csv");
-		Cidade ribeiraopreto = new Cidade(random.nextLong(Long.MAX_VALUE), "Ribeirão Preto", "SP", "ribeiraopreto", "crime-stats-ribeirao-preto.csv");
-		Cidade santos = new Cidade(random.nextLong(Long.MAX_VALUE), "Santos", "SP", "santos", "crime-stats-santos.csv");
-		Cidade saocarlos = new Cidade(random.nextLong(Long.MAX_VALUE), "São Carlos", "SP", "saocarlos", "crime-stats-sao-carlos.csv");
-		Cidade saopaulo = new Cidade(random.nextLong(Long.MAX_VALUE), "São Paulo", "SP", "saopaulo", "crime-stats-sao-paulo.csv");
-		Cidade sorocaba = new Cidade(random.nextLong(Long.MAX_VALUE), "Sorocaba", "SP", "sorocaba", "crime-stats-sorocaba.csv");
+		Cidade bauru = new Cidade(random.nextLong(Long.MAX_VALUE), "Bauru", "SP", "bauru", "data/crime-stats-bauru.csv");
+		Cidade campinas = new Cidade(random.nextLong(Long.MAX_VALUE), "Campinas", "SP", "campinas", "data/crime-stats-campinas.csv");
+		Cidade presidenteprudente = new Cidade(random.nextLong(Long.MAX_VALUE), "Presidente Prudente", "SP", "presidenteprudente", "data/crime-stats-presidente-prudente.csv");
+		Cidade ribeiraopreto = new Cidade(random.nextLong(Long.MAX_VALUE), "Ribeirão Preto", "SP", "ribeiraopreto", "data/crime-stats-ribeirao-preto.csv");
+		Cidade santos = new Cidade(random.nextLong(Long.MAX_VALUE), "Santos", "SP", "santos", "data/crime-stats-santos.csv");
+		Cidade saocarlos = new Cidade(random.nextLong(Long.MAX_VALUE), "São Carlos", "SP", "saocarlos", "data/crime-stats-sao-carlos.csv");
+		Cidade saopaulo = new Cidade(random.nextLong(Long.MAX_VALUE), "São Paulo", "SP", "saopaulo", "data/crime-stats-sao-paulo.csv");
+		Cidade sorocaba = new Cidade(random.nextLong(Long.MAX_VALUE), "Sorocaba", "SP", "sorocaba", "data/crime-stats-sorocaba.csv");
 		cidadeService.save(bauru, campinas, presidenteprudente, ribeiraopreto, santos, saocarlos, saopaulo, sorocaba);
 		
 		CsvFileParser.read(mapa, bauru);
