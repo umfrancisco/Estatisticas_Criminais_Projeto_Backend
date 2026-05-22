@@ -21,26 +21,14 @@ public class CrimeDTO {
 	public String getCidade() {
 		return cidade;
 	}
-	public void setCidade(String cidade) {
-		this.cidade = cidade;
-	}
 	public Integer getAno() {
 		return ano;
-	}
-	public void setAno(Integer ano) {
-		this.ano = ano;
 	}
 	public Infracao getInfracao() {
 		return infracao;
 	}
-	public void setInfracao(Infracao infracao) {
-		this.infracao = infracao;
-	}
 	public Integer getValor() {
 		return valor;
-	}
-	public void setValor(Integer valor) {
-		this.valor = valor;
 	}
 	
 	@Override
