@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 import com.umfrancisco.estatisticas_criminais_project.model.Ocorrencia;
 import com.umfrancisco.estatisticas_criminais_project.model.CrimeDTO;
+import com.umfrancisco.estatisticas_criminais_project.model.Data;
 import com.umfrancisco.estatisticas_criminais_project.model.Infracao;
 import com.umfrancisco.estatisticas_criminais_project.repository.OcorrenciaRepository;
 import com.umfrancisco.estatisticas_criminais_project.util.CsvFileParser;
@@ -62,16 +63,19 @@ public class OcorrenciaService {
 	
 	public void saveDataFromCsvFile() throws IOException {
 		Mapa mapa = new Mapa();
-		
-		CsvFileParser.read(mapa, "bauru", 1);
-		CsvFileParser.read(mapa, "campinas", 1);
-		CsvFileParser.read(mapa, "presidenteprudente", 1);
-		CsvFileParser.read(mapa, "ribeiraopreto", 1);
-		CsvFileParser.read(mapa, "santos", 1);
-		CsvFileParser.read(mapa, "saocarlos", 1);
-		CsvFileParser.read(mapa, "saopaulo", 1);
-		CsvFileParser.read(mapa, "sorocaba", 1);
-		
+		String[] cidades = {
+				"bauru", 
+				"campinas", 
+				"presidenteprudente", 
+				"ribeiraopreto",
+				"santos",
+				"saocarlos",
+				"saopaulo",
+				"sorocaba"
+		};
+		for (String cidade : cidades) {
+			CsvFileParser.read(mapa, cidade, Data.OCORRENCIA);			
+		}
 		for (var o : mapa.getOcorrencias()) {
 			save(o);
 		}

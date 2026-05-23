@@ -6,6 +6,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
 import java.util.Random;
+import com.umfrancisco.estatisticas_criminais_project.model.Data;
 import com.umfrancisco.estatisticas_criminais_project.model.Ocorrencia;
 import com.umfrancisco.estatisticas_criminais_project.model.TaxaDelito;
 
@@ -13,11 +14,10 @@ public class CsvFileParser {
 	
 	private static Random random = new Random();
 	
-	public static void read(Mapa mapa, String cidade, int option) throws IOException {
-		if (option == 1) {
+	public static void read(Mapa mapa, String cidade, Data data) throws IOException {
+		if (data == Data.OCORRENCIA) {
 			readOcorrencia(mapa, cidade);
-		}
-		if (option == 2) {
+		} else {
 			readTaxaDelito(mapa, cidade);
 		}
 	}

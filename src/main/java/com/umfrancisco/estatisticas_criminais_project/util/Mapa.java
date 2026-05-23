@@ -2,7 +2,6 @@ package com.umfrancisco.estatisticas_criminais_project.util;
 
 import java.util.ArrayList;
 import java.util.List;
-
 import com.umfrancisco.estatisticas_criminais_project.model.Ocorrencia;
 import com.umfrancisco.estatisticas_criminais_project.model.TaxaDelito;
 

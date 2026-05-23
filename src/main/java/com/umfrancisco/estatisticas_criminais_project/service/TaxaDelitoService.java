@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 import com.umfrancisco.estatisticas_criminais_project.model.TaxaDelito;
 import com.umfrancisco.estatisticas_criminais_project.model.CrimeDTO;
+import com.umfrancisco.estatisticas_criminais_project.model.Data;
 import com.umfrancisco.estatisticas_criminais_project.model.Infracao;
 import com.umfrancisco.estatisticas_criminais_project.repository.TaxaDelitoRepository;
 import com.umfrancisco.estatisticas_criminais_project.util.CsvFileParser;
@@ -62,16 +63,19 @@ public class TaxaDelitoService {
 	
 	public void saveDataFromCsvFile() throws IOException {
 		Mapa mapa = new Mapa();
-		
-		CsvFileParser.read(mapa, "bauru", 2);
-		CsvFileParser.read(mapa, "campinas", 2);
-		CsvFileParser.read(mapa, "presidenteprudente", 2);
-		CsvFileParser.read(mapa, "ribeiraopreto", 2);
-		CsvFileParser.read(mapa, "santos", 2);
-		CsvFileParser.read(mapa, "saocarlos", 2);
-		CsvFileParser.read(mapa, "saopaulo", 2);
-		CsvFileParser.read(mapa, "sorocaba", 2);
-		
+		String[] cidades = {
+				"bauru", 
+				"campinas", 
+				"presidenteprudente", 
+				"ribeiraopreto",
+				"santos",
+				"saocarlos",
+				"saopaulo",
+				"sorocaba"
+		};
+		for (String cidade : cidades) {
+			CsvFileParser.read(mapa, cidade, Data.TAXA_DELITO);			
+		}
 		for (var d : mapa.getTaxaDelitos()) {
 			save(d);
 		}
