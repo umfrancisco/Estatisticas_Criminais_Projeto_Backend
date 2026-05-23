@@ -3,28 +3,32 @@ package com.umfrancisco.estatisticas_criminais_project.util;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.umfrancisco.estatisticas_criminais_project.model.Crime;
+import com.umfrancisco.estatisticas_criminais_project.model.Ocorrencia;
+import com.umfrancisco.estatisticas_criminais_project.model.TaxaDelito;
 
 public class Mapa {
 
-	private List<Crime> crimes;
-//	private List<CrimePorHabitante> crimesPorHab;
+	private List<Ocorrencia> ocorrencias;
+	private List<TaxaDelito> taxaDelitos;
 	
 	public Mapa() {
-		crimes = new ArrayList<Crime>();
+		ocorrencias = new ArrayList<Ocorrencia>();
+		taxaDelitos = new ArrayList<TaxaDelito>();
 	}
 	
-	public void add(Crime crime) {
-		crimes.add(crime);
+	public void add(Ocorrencia ocorrencia) {
+		ocorrencias.add(ocorrencia);
 	}
 	
-	public List<Crime> getCrimes() {
-		return crimes;
+	public void add(TaxaDelito delito) {
+		taxaDelitos.add(delito);
 	}
 	
-	public void print() {
-		for (var crime : crimes) {
-			System.out.println(crime);
-		}
+	public List<Ocorrencia> getOcorrencias() {
+		return ocorrencias;
+	}
+	
+	public List<TaxaDelito> getTaxaDelitos() {
+		return taxaDelitos;
 	}
 }

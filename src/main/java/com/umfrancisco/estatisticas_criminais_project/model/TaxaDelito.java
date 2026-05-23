@@ -2,27 +2,26 @@ package com.umfrancisco.estatisticas_criminais_project.model;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
-import jakarta.persistence.ManyToOne;
 
 @Entity
-public class Crime {
+public class TaxaDelito {
 	
 	@Id
 	private Long id;
-	@ManyToOne
-	private Cidade cidade;
+	private String cidade;
 	private Integer ano;
-	private Integer homicidio;
-	private Integer furto;
-	private Integer roubo;
-	private Integer furtoRouboVeiculos;
+	private Double homicidio;
+	private Double furto;
+	private Double roubo;
+	private Double furtoRouboVeiculos;
 	
-	public Crime() {
+	public TaxaDelito() {
 		
 	}
 	
-	public Crime(Long id, Cidade cidade, Integer ano, Integer homicidio, Integer furto, Integer roubo,
-			Integer furtoRouboVeiculos) {
+	public TaxaDelito(Long id, String cidade, Integer ano, Double homicidio, Double furto, Double roubo,
+			Double furtoRouboVeiculos) {
+		super();
 		this.id = id;
 		this.cidade = cidade;
 		this.ano = ano;
@@ -35,28 +34,28 @@ public class Crime {
 	public Long getId() {
 		return id;
 	}
-	public Cidade getCidade() {
+	public String getCidade() {
 		return cidade;
 	}
 	public Integer getAno() {
 		return ano;
 	}
-	public Integer getHomicidio() {
+	public Double getHomicidio() {
 		return homicidio;
 	}
-	public Integer getFurto() {
+	public Double getFurto() {
 		return furto;
 	}
-	public Integer getRoubo() {
+	public Double getRoubo() {
 		return roubo;
 	}
-	public Integer getFurtoRouboVeiculos() {
+	public Double getFurtoRouboVeiculos() {
 		return furtoRouboVeiculos;
 	}
 	
 	@Override
 	public String toString() {
-		return "Crime [id=" + id + ", cidade=" + cidade + ", ano=" + ano + ", homicidio=" + homicidio + ", furto="
+		return "TaxaDelito [id=" + id + ", cidade=" + cidade + ", ano=" + ano + ", homicidio=" + homicidio + ", furto="
 				+ furto + ", roubo=" + roubo + ", furtoRouboVeiculos=" + furtoRouboVeiculos + "]";
 	}
 }

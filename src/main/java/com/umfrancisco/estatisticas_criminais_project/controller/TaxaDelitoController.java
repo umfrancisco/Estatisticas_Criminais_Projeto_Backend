@@ -7,29 +7,29 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import com.umfrancisco.estatisticas_criminais_project.model.Crime;
 import com.umfrancisco.estatisticas_criminais_project.model.CrimeDTO;
 import com.umfrancisco.estatisticas_criminais_project.model.Infracao;
-import com.umfrancisco.estatisticas_criminais_project.service.CrimeService;
+import com.umfrancisco.estatisticas_criminais_project.model.TaxaDelito;
+import com.umfrancisco.estatisticas_criminais_project.service.TaxaDelitoService;
 
 @RestController
-@RequestMapping("/api/crimes")
+@RequestMapping("/taxa")
 @CrossOrigin
-public class CrimeController {
+public class TaxaDelitoController {
 
-	private CrimeService service;
+	private TaxaDelitoService service;
 	
-	public CrimeController(CrimeService service) {
+	public TaxaDelitoController(TaxaDelitoService service) {
 		this.service = service;
 	}
 	
 	@GetMapping
-	public List<Crime> findAll() {
+	public List<TaxaDelito> findAll() {
 		return service.findAll();
 	}
 	
 	@GetMapping("/{cidade}")
-	public List<Crime> findByCidade(@PathVariable String cidade) {
+	public List<TaxaDelito> findByCidade(@PathVariable String cidade) {
 		return service.findByCidade(cidade);
 	}
 	

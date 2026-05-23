@@ -5,13 +5,13 @@ public class CrimeDTO {
 	private String cidade;
 	private Integer ano;
 	private Infracao infracao;
-	private Integer valor;
+	private Double valor;
 	
 	public CrimeDTO() {
 		
 	}
 	
-	public CrimeDTO(String cidade, Integer ano, Infracao infracao, Integer valor) {
+	public CrimeDTO(String cidade, Integer ano, Infracao infracao, Double valor) {
 		this.cidade = cidade;
 		this.ano = ano;
 		this.infracao = infracao;
@@ -27,7 +27,7 @@ public class CrimeDTO {
 	public Infracao getInfracao() {
 		return infracao;
 	}
-	public Integer getValor() {
+	public Double getValor() {
 		return valor;
 	}
 	
