@@ -14,8 +14,17 @@ public class CsvFileParser {
 	private static Random random = new Random();
 	
 	public static void read(Mapa mapa, Cidade cidade) throws IOException {
-		String fileName = cidade.getFileName();
-		Path path = Paths.get(fileName);
+		readAbsoluteNumbers(mapa, cidade);
+		readRelativeNumbers(mapa, cidade);
+	}
+	
+	public static void readRelativeNumbers(Mapa mapa, Cidade cidade) {
+		
+	}
+	
+	public static void readAbsoluteNumbers(Mapa mapa, Cidade cidade) throws IOException {
+		String nomeCidadeUrl = cidade.getNomeCidadeUrl();
+		Path path = Paths.get("data/crime-stats-%s.csv".formatted(nomeCidadeUrl));
 		List<String> lines = Files.readAllLines(path);
 		for (var line : lines) {
 			String[] fields = line.split(",");

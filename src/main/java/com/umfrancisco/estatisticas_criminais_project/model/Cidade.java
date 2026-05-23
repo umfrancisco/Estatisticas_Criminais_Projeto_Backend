@@ -11,18 +11,16 @@ public class Cidade {
 	private String cidade;
 	private String estado;
 	private String nomeCidadeUrl;
-	private String fileName;
 	
 	public Cidade() {
 		
 	}
 	
-	public Cidade(Long id, String cidade, String estado, String nomeCidadeUrl, String fileName) {
+	public Cidade(Long id, String cidade, String estado, String nomeCidadeUrl) {
 		this.id = id;
 		this.cidade = cidade;
 		this.estado = estado;
 		this.nomeCidadeUrl = nomeCidadeUrl;
-		this.fileName = fileName;
 	}
 	
 	public Long getId() {
@@ -37,13 +35,9 @@ public class Cidade {
 	public String getNomeCidadeUrl() {
 		return nomeCidadeUrl;
 	}
-	public String getFileName() {
-		return fileName;
-	}
 	
 	@Override
 	public String toString() {
-		return "Cidade [id=" + id + ", cidade=" + cidade + ", estado=" + estado + ", nomeCidadeUrl=" + nomeCidadeUrl
-				+ ", fileName=" + fileName + "]";
+		return "Cidade [id=" + id + ", cidade=" + cidade + ", estado=" + estado + ", nomeCidadeUrl=" + nomeCidadeUrl+"]";
 	}
 }

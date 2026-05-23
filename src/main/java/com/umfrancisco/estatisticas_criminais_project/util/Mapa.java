@@ -8,6 +8,7 @@ import com.umfrancisco.estatisticas_criminais_project.model.Crime;
 public class Mapa {
 
 	private List<Crime> crimes;
+//	private List<CrimePorHabitante> crimesPorHab;
 	
 	public Mapa() {
 		crimes = new ArrayList<Crime>();
