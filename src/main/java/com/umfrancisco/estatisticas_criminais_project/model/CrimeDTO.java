@@ -12,6 +12,7 @@ public class CrimeDTO {
 	}
 	
 	public CrimeDTO(String cidade, Integer ano, Infracao infracao, Double valor) {
+		super();
 		this.cidade = cidade;
 		this.ano = ano;
 		this.infracao = infracao;

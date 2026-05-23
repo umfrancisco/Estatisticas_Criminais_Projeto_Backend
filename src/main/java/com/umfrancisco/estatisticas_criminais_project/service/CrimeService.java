@@ -4,34 +4,33 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import org.springframework.stereotype.Service;
-import com.umfrancisco.estatisticas_criminais_project.model.TaxaDelito;
+import com.umfrancisco.estatisticas_criminais_project.model.Crime;
 import com.umfrancisco.estatisticas_criminais_project.model.CrimeDTO;
-import com.umfrancisco.estatisticas_criminais_project.model.Data;
 import com.umfrancisco.estatisticas_criminais_project.model.Infracao;
-import com.umfrancisco.estatisticas_criminais_project.repository.TaxaDelitoRepository;
+import com.umfrancisco.estatisticas_criminais_project.repository.CrimeRepository;
 import com.umfrancisco.estatisticas_criminais_project.util.CsvFileParser;
 import com.umfrancisco.estatisticas_criminais_project.util.Mapa;
 
 @Service
-public class TaxaDelitoService {
+public class CrimeService {
 	
-	private TaxaDelitoRepository repository; 
+	private CrimeRepository repository; 
 	
-	public TaxaDelitoService(TaxaDelitoRepository repository) {
+	public CrimeService(CrimeRepository repository) {
 		this.repository = repository;
 	}
 	
-	public void save(TaxaDelito taxaDelito) {
+	public void save(Crime taxaDelito) {
 		repository.save(taxaDelito);
 	}
 	
-	public List<TaxaDelito> findAll() {
+	public List<Crime> findAll() {
 		return repository.findAll();
 	}
 	
-	public List<TaxaDelito> findByCidade(String cidade) {
-		List<TaxaDelito> list = findAll();
-		List<TaxaDelito> found = new ArrayList<>();
+	public List<Crime> findByCidade(String cidade) {
+		List<Crime> list = findAll();
+		List<Crime> found = new ArrayList<>();
 		for (var c : list) {
 			if (c.getCidade().equals(cidade)) {
 				found.add(c);
@@ -40,11 +39,11 @@ public class TaxaDelitoService {
 		return found;
 	}
 	
-	public List<CrimeDTO> findByCidadeAndInfracao(String cidade, Infracao infracao) {
-		List<TaxaDelito> list = findAll();
+	public List<CrimeDTO> findByCidadeAndInfracao(String cidade, Infracao infracao, Boolean porHabitante) {
+		List<Crime> list = repository.findByCidade(cidade);
 		List<CrimeDTO> found = new ArrayList<>();
 		for (var c : list) {
-			if (c.getCidade().equals(cidade)) {
+			if (c.getCidade().equals(cidade) && c.getPorHabitante() == porHabitante) {
 				String nomeCidade = c.getCidade();
 				Integer ano = c.getAno();
 				Double valorInfracao = null;
@@ -74,10 +73,11 @@ public class TaxaDelitoService {
 				"sorocaba"
 		};
 		for (String cidade : cidades) {
-			CsvFileParser.read(mapa, cidade, Data.TAXA_DELITO);			
+			CsvFileParser.read(mapa, cidade, "data/taxa-delito-%s.csv", true);
+			CsvFileParser.read(mapa, cidade, "data/ocorrencias-%s.csv", false);
 		}
-		for (var d : mapa.getTaxaDelitos()) {
-			save(d);
+		for (var c : mapa.getCrimes()) {
+			save(c);
 		}
 	}
 }

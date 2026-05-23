@@ -4,7 +4,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 
 @Entity
-public class TaxaDelito {
+public class Crime {
 	
 	@Id
 	private Long id;
@@ -14,14 +14,14 @@ public class TaxaDelito {
 	private Double furto;
 	private Double roubo;
 	private Double furtoRouboVeiculos;
+	private Boolean porHabitante;
 	
-	public TaxaDelito() {
+	public Crime() {
 		
 	}
 	
-	public TaxaDelito(Long id, String cidade, Integer ano, Double homicidio, Double furto, Double roubo,
-			Double furtoRouboVeiculos) {
-		super();
+	public Crime(Long id, String cidade, Integer ano, Double homicidio, Double furto, Double roubo,
+			Double furtoRouboVeiculos, Boolean porHabitante) {
 		this.id = id;
 		this.cidade = cidade;
 		this.ano = ano;
@@ -29,6 +29,7 @@ public class TaxaDelito {
 		this.furto = furto;
 		this.roubo = roubo;
 		this.furtoRouboVeiculos = furtoRouboVeiculos;
+		this.porHabitante = porHabitante;
 	}
 	
 	public Long getId() {
@@ -52,10 +53,14 @@ public class TaxaDelito {
 	public Double getFurtoRouboVeiculos() {
 		return furtoRouboVeiculos;
 	}
+	public Boolean getPorHabitante() {
+		return porHabitante;
+	}
 	
 	@Override
 	public String toString() {
-		return "TaxaDelito [id=" + id + ", cidade=" + cidade + ", ano=" + ano + ", homicidio=" + homicidio + ", furto="
-				+ furto + ", roubo=" + roubo + ", furtoRouboVeiculos=" + furtoRouboVeiculos + "]";
+		return "[id=" + id + ", cidade=" + cidade + ", ano=" + ano + ", homicidio=" + homicidio + ", furto="
+				+ furto + ", roubo=" + roubo + ", furtoRouboVeiculos=" + furtoRouboVeiculos + ", porHabitante="
+				+ porHabitante + "]";
 	}
 }
