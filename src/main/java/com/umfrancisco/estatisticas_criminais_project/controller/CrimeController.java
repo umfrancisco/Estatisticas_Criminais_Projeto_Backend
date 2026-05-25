@@ -28,7 +28,17 @@ public class CrimeController {
 		return service.findAll();
 	}
 	
-	@GetMapping("/{cidade}/{infracao}/{porHabitante}")
+	@GetMapping("/ano/{ano}/porhabitante/{porHabitante}")
+	public List<Crime> findByAnoAndPorHabitante(@PathVariable Integer ano, @PathVariable Boolean porHabitante) {
+		return service.findByAnoAndPorHabitante(ano, porHabitante);
+	}
+	
+	@GetMapping("/{cidade}")
+	public List<Crime> findByCidade(@PathVariable String cidade) {
+		return service.findByCidade(cidade);
+	}
+	
+	@GetMapping("/{cidade}/{infracao}/porhabitante/{porHabitante}")
 	public List<CrimeDTO> findByCidadeAndInfracao(@PathVariable String cidade, @PathVariable String infracao, @PathVariable Boolean porHabitante) {
 		infracao = infracao.toLowerCase();
 		return switch (infracao) {

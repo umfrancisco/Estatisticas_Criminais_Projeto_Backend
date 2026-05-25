@@ -29,21 +29,18 @@ public class CrimeService {
 	}
 	
 	public List<Crime> findByCidade(String cidade) {
-		List<Crime> list = findAll();
-		List<Crime> found = new ArrayList<>();
-		for (var c : list) {
-			if (c.getCidade().equals(cidade)) {
-				found.add(c);
-			}
-		}
-		return found;
+		return repository.findByCidade(cidade);
+	}
+	
+	public List<Crime> findByAnoAndPorHabitante(Integer ano, Boolean porHabitante) {
+		return repository.findByAnoAndPorHabitante(ano, porHabitante);
 	}
 	
 	public List<CrimeDTO> findByCidadeAndInfracao(String cidade, Infracao infracao, Boolean porHabitante) {
-		List<Crime> list = repository.findByCidade(cidade);
+		List<Crime> list = repository.findByCidadeAndPorHabitante(cidade, porHabitante);
 		List<CrimeDTO> found = new ArrayList<>();
 		for (var c : list) {
-			if (c.getCidade().equals(cidade) && c.getPorHabitante() == porHabitante) {
+			if (c.getCidade().equals(cidade)) {
 				String nomeCidade = c.getCidade();
 				Integer ano = c.getAno();
 				Double valorInfracao = null;
