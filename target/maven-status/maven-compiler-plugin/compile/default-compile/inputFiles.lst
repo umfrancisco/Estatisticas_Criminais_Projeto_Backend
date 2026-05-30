@@ -1,0 +1,9 @@
+/home/francisco/Documents/java-workspaces/projects/estatisticas-criminais-project/src/main/java/com/umfrancisco/estatisticas_criminais_project/Application.java
+/home/francisco/Documents/java-workspaces/projects/estatisticas-criminais-project/src/main/java/com/umfrancisco/estatisticas_criminais_project/controller/CrimeController.java
+/home/francisco/Documents/java-workspaces/projects/estatisticas-criminais-project/src/main/java/com/umfrancisco/estatisticas_criminais_project/model/Crime.java
+/home/francisco/Documents/java-workspaces/projects/estatisticas-criminais-project/src/main/java/com/umfrancisco/estatisticas_criminais_project/model/CrimeDTO.java
+/home/francisco/Documents/java-workspaces/projects/estatisticas-criminais-project/src/main/java/com/umfrancisco/estatisticas_criminais_project/model/Infracao.java
+/home/francisco/Documents/java-workspaces/projects/estatisticas-criminais-project/src/main/java/com/umfrancisco/estatisticas_criminais_project/repository/CrimeRepository.java
+/home/francisco/Documents/java-workspaces/projects/estatisticas-criminais-project/src/main/java/com/umfrancisco/estatisticas_criminais_project/service/CrimeService.java
+/home/francisco/Documents/java-workspaces/projects/estatisticas-criminais-project/src/main/java/com/umfrancisco/estatisticas_criminais_project/util/CsvFileParser.java
+/home/francisco/Documents/java-workspaces/projects/estatisticas-criminais-project/src/main/java/com/umfrancisco/estatisticas_criminais_project/util/Mapa.java
